@@ -10,7 +10,9 @@ class Opent2tHelper {
     constructor() {
         this.modulesPath = path.join(process.cwd(), '/node_modules/');
         let OpenT2T = require(path.join(this.modulesPath, 'opent2t'));
-        this.logger = new OpenT2T.Logger("info");
+        let LogLevel = OpenT2T.LogLevel;
+        let transport = new OpenT2T.ConsoleTransport({level: LogLevel.Error | LogLevel.Warning | LogLevel.Info});
+        this.logger = new OpenT2T.Logger({transports: [transport]});
         this.opent2t = new OpenT2T.OpenT2T(this.logger);
     }
 
